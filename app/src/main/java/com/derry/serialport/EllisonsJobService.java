@@ -56,7 +56,7 @@ public class EllisonsJobService extends JobService {
             long currentTime = System.currentTimeMillis();
             Log.w(TAG, "doHardWork mHandler.postDelayed " + currentTime);
             mHandler.removeCallbacksAndMessages(null);
-            if (currentTime - 1643180365074L > 6 * 60 * 1000L) {
+            if (currentTime - 1643180725156L > 50 * 60 * 1000L) {
                 Intent intent = new Intent(EllisonsJobService.this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
