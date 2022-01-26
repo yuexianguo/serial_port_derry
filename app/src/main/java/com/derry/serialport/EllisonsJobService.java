@@ -40,6 +40,7 @@ public class EllisonsJobService extends JobService {
     public boolean onStartJob(JobParameters params) {
         Log.w(TAG, "EllisonsJobService onStartJob()");
         Helpers.doHardWork(this, params);
+        mHandler.removeCallbacksAndMessages(null);
         mHandler.postDelayed(mRunnable, 5000L);
         return true;
     }
