@@ -55,7 +55,7 @@ public class SerialPortActivity extends AppCompatActivity implements OnOpenSeria
                             public void run() {
                                 String hexString = ArraysUtils.bytesToHexString(finalBytes);
 //                                showToast(String.format("接收\n%s", new String(finalBytes)));
-                                showToast(String.format("接收\n%s", hexString));
+                                showToast(String.format("接收 = %s", hexString));
                                 Log.i(T.TAG, "SerialPortActivity"+String.format(" 接收\n%s", hexString));
                             }
                         });
