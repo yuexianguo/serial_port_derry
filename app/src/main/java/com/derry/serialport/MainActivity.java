@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 
 import com.derry.serialportlibrary.T;
@@ -18,6 +19,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON //保持屏幕常亮
+
+                | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED //在锁屏情况下也可以显示屏幕
+
+                | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON); //启动Activity的时候点亮屏幕
         setContentView(R.layout.activity_main);
         Button bt_onClick_Schedule = (Button) findViewById(R.id.bt_onClick_Schedule);
         Button bt_onClick_Finished = (Button) findViewById(R.id.bt_onClick_Finished);
