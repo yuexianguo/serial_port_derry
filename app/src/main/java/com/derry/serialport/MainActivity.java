@@ -1,7 +1,11 @@
 package com.derry.serialport;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
+import android.os.PowerManager;
+import android.provider.Settings;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -51,7 +55,36 @@ public class MainActivity extends AppCompatActivity {
             Log.w(TAG, "MainActivity onClick_Enqueue()");
             startActivity(new Intent(this,SelectSerialPortActivity.class));
         });
+
+        extracted();
     }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private void extracted() {
+        boolean isIgnoreBatteryOptimize = checkIsIgnoreBatteryOptimize();
+        Log.d(T.TAG,"isIgnoreBatteryOptimize="+isIgnoreBatteryOptimize);
+        try {
+            if (!isIgnoreBatteryOptimize) {
+                Intent intent = new Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
+                intent.setData(Uri.parse("package:"+getPackageName()));
+                startActivity(intent);
+            }
+        } catch (Exception e){
+
+        }
+
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private boolean checkIsIgnoreBatteryOptimize() {
+        PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
+        if (powerManager != null) {
+            boolean ignoringBatteryOptimizations = powerManager.isIgnoringBatteryOptimizations(getPackageName());
+            return ignoringBatteryOptimizations;
+        }
+        return false;
+    }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
